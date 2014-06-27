@@ -10,7 +10,8 @@
 
 @interface SerieTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UIView *dark;
 @property (weak, nonatomic) IBOutlet UIImageView *banner;
 
-- (void)setOffset:(float)p;
+- (void)setAlpha:(float)p;
 @end

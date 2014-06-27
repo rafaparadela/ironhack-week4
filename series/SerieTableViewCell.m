@@ -14,14 +14,14 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+//        self.separatorInset = UIEdgeInsetsMake(0.f, 0.f, 0.f, self.bounds.size.width);
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -34,11 +34,15 @@
 
 #pragma mark - efectos
 
-- (void)setOffset:(float)p
+- (void)setAlpha:(float)p
 {
-    CGRect imageFrame = self.banner.frame;
-    imageFrame.origin = CGPointMake(0, -p*(self.banner.frame.size.height-self.bounds.size.height));
-    self.banner.frame = imageFrame;
+
+    CGFloat alpha = 1-(p<0.5?2*p:(1-p)*2);
+//
+    self.dark.alpha = alpha;
+    self.title.alpha = alpha;
+    
+    
 }
 
 @end

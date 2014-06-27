@@ -38,6 +38,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.tableView.separatorColor = [UIColor blackColor];
 }
 
 
@@ -54,6 +55,7 @@
     [self.seriesProvider trendingSeriesWithSuccessBlock:^(id data) {
         self.series = data;
         [self.tableView reloadData];
+        [self.tableView setContentOffset:CGPointMake(0.0, -63.0)];
     } errorBlock:^(NSError *error) {
         NSLog(@"Error");
     }];
@@ -95,6 +97,8 @@
             [UIView animateWithDuration:1.0 animations:^{
                 cell.banner.alpha = 1.0;
             }];
+            
+            cell.banner.frame = CGRectMake(0, 0, image.size.width/2.0, image.size.height/2.0);
         }
         
     }];
@@ -106,10 +110,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     for (SerieTableViewCell* cell in self.tableView.visibleCells) {
-        float distancia = cell.frame.origin.y-scrollView.contentOffset.y;
+        float distancia = cell.frame.origin.y-scrollView.contentOffset.y+64;
         float offset = distancia/scrollView.frame.size.height;
-        NSLog(@"%f",offset);
-        [cell setOffset:offset];
+        [cell setAlpha:offset];
     }
 }
 
